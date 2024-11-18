@@ -82,11 +82,11 @@
             margin: 0 auto;
             padding: 0 24px;
             gap: 32px;
-            height: 48px;
+            height: 72px;
         }
 
         .logo {
-            height: 60px;
+            height: 56px;
             width: auto;
             cursor: pointer;
             object-fit: contain;
@@ -149,6 +149,37 @@
             font-size: 14px;
             margin-bottom: 8px;
             font-weight: 500;
+        }
+
+        .explanation {
+            background-color: var(--md-sys-color-secondary-container);
+            border-radius: var(--md-sys-shape-corner-medium);
+            padding: 24px;
+            margin-bottom: 24px;
+            color: var(--md-sys-color-on-secondary-container);
+        }
+
+        .explanation p {
+            margin-bottom: 16px;
+        }
+
+        .explanation ul {
+            list-style-position: inside;
+            padding-left: 16px;
+            margin-bottom: 8px;
+        }
+
+        .explanation li {
+            margin-bottom: 12px;
+            text-indent: -24px;
+            padding-left: 24px;
+            line-height: 1.5;
+        }
+
+        .explanation .material-symbols-rounded {
+            vertical-align: middle;
+            margin-right: 8px;
+            font-size: 24px;
         }
 
         .input-field {
@@ -218,19 +249,6 @@
         button.secondary:hover {
             background-color: var(--md-sys-color-secondary-container);
             box-shadow: var(--md-sys-elevation-1);
-        }
-
-        .explanation {
-            background-color: var(--md-sys-color-secondary-container);
-            border-radius: var(--md-sys-shape-corner-medium);
-            padding: 16px;
-            margin-bottom: 24px;
-            color: var(--md-sys-color-on-secondary-container);
-        }
-
-        .explanation .material-symbols-rounded {
-            vertical-align: middle;
-            margin-right: 8px;
         }
 
         .results-grid {
@@ -325,16 +343,17 @@
             }
 
             .header-content {
+                height: 80px;
                 padding: 0 16px;
                 gap: 16px;
             }
 
-            .header-title {
-                font-size: 20px;
+            .logo {
+                height: 64px;
             }
 
-            .logo {
-                height: 32px;
+            .header-title {
+                font-size: 20px;
             }
 
             .results-grid {
@@ -347,6 +366,14 @@
 
             button {
                 width: 100%;
+            }
+
+            .explanation {
+                padding: 20px;
+            }
+
+            .explanation li {
+                margin-bottom: 12px;
             }
 
             .bar-graph-container {
@@ -377,13 +404,15 @@
             <div class="card">
                 <h2>Bienvenido a Tu Calculadora Integral de Salario Mexicano</h2>
                 <div class="explanation">
-                    <span class="material-symbols-rounded">info</span>
-                    <p>Esta calculadora, construido por <a href="https://www.finmango.org/" target="_blank">FinMango</a> en colaboración con <a href="https://www.linkedin.com/in/lizbeth-sinai-rodriguez/" target="_blank">Lizbeth Sinaí Rodríguez</a>, te ayuda a evaluar tu situación financiera en diferentes ciudades de México, considerando:</p>
+                    <div class="explanation-header">
+                        <span class="material-symbols-rounded">info</span>
+                        <p>Esta calculadora te ayuda a evaluar tu situación financiera en diferentes ciudades de México, considerando:</p>
+                    </div>
                     <ul>
-                        <li>Salario anual y deducciones</li>
-                        <li>Costos de vida por ciudad</li>
-                        <li>Gastos sociales y entretenimiento</li>
-                        <li>Comparativas entre ciudades</li>
+                        <li>Salario anual y deducciones fiscales según las tasas vigentes de México</li>
+                        <li>Costos de vida actualizados para cada ciudad, incluyendo renta y servicios</li>
+                        <li>Gastos típicos de alimentación, transporte y vida diaria</li>
+                        <li>Presupuesto para vida social y entretenimiento</li>
                     </ul>
                 </div>
                 <button class="primary" onclick="showPage('locationPage')">
@@ -392,8 +421,7 @@
                 </button>
             </div>
         </div>
-
-        <div id="locationPage" class="page">
+<div id="locationPage" class="page">
             <div class="card">
                 <h2>Selecciona Ciudades para Comparar</h2>
                 <div class="explanation">
@@ -414,7 +442,7 @@
                 </div>
                 <div class="button-container">
                     <button class="secondary" onclick="showPage('introPage')">
-<span class="material-symbols-rounded">arrow_back</span>
+                        <span class="material-symbols-rounded">arrow_back</span>
                         Anterior
                     </button>
                     <button class="primary" onclick="showPage('salaryPage')">
@@ -578,7 +606,6 @@
             document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
             
-            // Set default salary when showing salary page
             if (pageId === 'salaryPage' && !document.getElementById('salary').value) {
                 document.getElementById('salary').value = '360,000';
             }
