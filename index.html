@@ -5,19 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora de Salario Mexicano</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
     <style>
         :root {
-            --primary: #1976D2;
-            --primary-dark: #1565C0;
-            --primary-light: #BBDEFB;
-            --accent: #FF4081;
-            --text-primary: rgba(0, 0, 0, 0.87);
-            --text-secondary: rgba(0, 0, 0, 0.60);
-            --divider: rgba(0, 0, 0, 0.12);
-            --error: #B00020;
-            --surface: #FFFFFF;
-            --background: #F5F5F5;
+            /* MD3 Color Tokens */
+            --md-sys-color-primary: #006A6A;
+            --md-sys-color-on-primary: #FFFFFF;
+            --md-sys-color-primary-container: #6FF7F7;
+            --md-sys-color-on-primary-container: #002020;
+            --md-sys-color-secondary: #4A6363;
+            --md-sys-color-on-secondary: #FFFFFF;
+            --md-sys-color-secondary-container: #CCE8E7;
+            --md-sys-color-on-secondary-container: #051F1F;
+            --md-sys-color-tertiary: #4B607C;
+            --md-sys-color-on-tertiary: #FFFFFF;
+            --md-sys-color-tertiary-container: #D3E4FF;
+            --md-sys-color-on-tertiary-container: #041C35;
+            --md-sys-color-error: #BA1A1A;
+            --md-sys-color-on-error: #FFFFFF;
+            --md-sys-color-error-container: #FFDAD6;
+            --md-sys-color-on-error-container: #410002;
+            --md-sys-color-background: #FAFDFC;
+            --md-sys-color-on-background: #191C1C;
+            --md-sys-color-surface: #FAFDFC;
+            --md-sys-color-on-surface: #191C1C;
+            --md-sys-color-surface-variant: #DAE5E4;
+            --md-sys-color-on-surface-variant: #3F4948;
+            --md-sys-color-outline: #6F7978;
+            
+            /* MD3 Elevation Values */
+            --md-sys-elevation-1: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+            --md-sys-elevation-2: 0px 2px 6px 2px rgba(0, 0, 0, 0.15);
+            --md-sys-elevation-3: 0px 4px 8px 3px rgba(0, 0, 0, 0.15);
+            
+            /* MD3 Shape Scale */
+            --md-sys-shape-corner-extra-small: 4px;
+            --md-sys-shape-corner-small: 8px;
+            --md-sys-shape-corner-medium: 12px;
+            --md-sys-shape-corner-large: 16px;
+            --md-sys-shape-corner-extra-large: 28px;
         }
 
         * {
@@ -28,9 +54,9 @@
 
         body { 
             font-family: 'Roboto', sans-serif;
-            line-height: 1.6;
-            color: var(--text-primary);
-            background-color: var(--background);
+            line-height: 1.5;
+            color: var(--md-sys-color-on-surface);
+            background-color: var(--md-sys-color-background);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
@@ -42,10 +68,10 @@
         }
 
         .header {
-            background-color: var(--primary);
-            color: white;
+            background-color: var(--md-sys-color-surface);
+            color: var(--md-sys-color-on-surface);
             padding: 16px 0;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: var(--md-sys-elevation-2);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -67,7 +93,7 @@
 
         .page {
             display: none;
-            animation: fadeIn 0.3s ease-in-out;
+            animation: fadeIn 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
         }
 
         .page.active {
@@ -75,32 +101,33 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .card {
-            background: var(--surface);
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            background: var(--md-sys-color-surface);
+            border-radius: var(--md-sys-shape-corner-large);
+            box-shadow: var(--md-sys-elevation-1);
             padding: 24px;
             margin-bottom: 24px;
-            transition: box-shadow 0.3s ease;
+            transition: box-shadow 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+            border: 1px solid var(--md-sys-color-outline);
         }
 
         .card:hover {
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            box-shadow: var(--md-sys-elevation-2);
         }
 
         h1, h2, h3 {
-            color: var(--text-primary);
+            color: var(--md-sys-color-on-surface);
             font-weight: 500;
             margin-bottom: 16px;
         }
 
-        h1 { font-size: 24px; }
-        h2 { font-size: 20px; }
-        h3 { font-size: 18px; }
+        h1 { font-size: 28px; }
+        h2 { font-size: 24px; }
+        h3 { font-size: 20px; }
 
         .form-group {
             margin-bottom: 24px;
@@ -108,9 +135,10 @@
 
         label {
             display: block;
-            color: var(--text-secondary);
+            color: var(--md-sys-color-on-surface-variant);
             font-size: 14px;
             margin-bottom: 8px;
+            font-weight: 500;
         }
 
         .input-field {
@@ -121,20 +149,20 @@
         input[type="text"],
         select {
             width: 100%;
-            padding: 12px 16px;
-            border: 1px solid var(--divider);
-            border-radius: 4px;
+            padding: 16px;
+            border: 1px solid var(--md-sys-color-outline);
+            border-radius: var(--md-sys-shape-corner-small);
             font-size: 16px;
-            color: var(--text-primary);
-            background: var(--surface);
-            transition: border-color 0.3s, box-shadow 0.3s;
+            color: var(--md-sys-color-on-surface);
+            background: var(--md-sys-color-surface);
+            transition: all 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
         }
 
         input[type="text"]:focus,
         select:focus {
-            border-color: var(--primary);
+            border-color: var(--md-sys-color-primary);
             outline: none;
-            box-shadow: 0 0 0 2px var(--primary-light);
+            box-shadow: 0 0 0 4px var(--md-sys-color-primary-container);
         }
 
         .button-container {
@@ -146,95 +174,111 @@
         button {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
-            padding: 10px 24px;
+            padding: 12px 24px;
             border: none;
-            border-radius: 4px;
+            border-radius: var(--md-sys-shape-corner-large);
             font-size: 14px;
             font-weight: 500;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.1px;
             cursor: pointer;
-            transition: background-color 0.3s, box-shadow 0.3s;
+            transition: all 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+            min-width: 120px;
         }
 
         button.primary {
-            background-color: var(--primary);
-            color: white;
+            background-color: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
+            box-shadow: var(--md-sys-elevation-1);
         }
 
         button.primary:hover {
-            background-color: var(--primary-dark);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            background-color: var(--md-sys-color-primary);
+            box-shadow: var(--md-sys-elevation-2);
+            transform: translateY(-1px);
         }
 
         button.secondary {
-            background-color: transparent;
-            color: var(--primary);
+            background-color: var(--md-sys-color-secondary-container);
+            color: var(--md-sys-color-on-secondary-container);
         }
 
         button.secondary:hover {
-            background-color: rgba(25, 118, 210, 0.08);
+            background-color: var(--md-sys-color-secondary-container);
+            box-shadow: var(--md-sys-elevation-1);
         }
 
         .explanation {
-            background-color: var(--primary-light);
-            border-radius: 4px;
+            background-color: var(--md-sys-color-secondary-container);
+            border-radius: var(--md-sys-shape-corner-medium);
             padding: 16px;
             margin-bottom: 24px;
+            color: var(--md-sys-color-on-secondary-container);
         }
 
-        .explanation .material-icons {
+        .explanation .material-symbols-rounded {
             vertical-align: middle;
             margin-right: 8px;
         }
 
         .results-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 24px;
             margin-top: 24px;
         }
 
         .city-result {
-            background: white;
-            border-radius: 8px;
+            background: var(--md-sys-color-surface);
+            border-radius: var(--md-sys-shape-corner-large);
             padding: 24px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: var(--md-sys-elevation-1);
         }
 
         .breakdown-table {
             width: 100%;
-            border-collapse: collapse;
+            border-collapse: separate;
+            border-spacing: 0;
             margin-top: 16px;
+            border-radius: var(--md-sys-shape-corner-medium);
+            overflow: hidden;
+            box-shadow: var(--md-sys-elevation-1);
         }
 
         .breakdown-table th,
         .breakdown-table td {
-            padding: 12px;
+            padding: 16px;
             text-align: left;
-            border-bottom: 1px solid var(--divider);
+            border-bottom: 1px solid var(--md-sys-color-outline);
         }
 
         .breakdown-table th {
+            background-color: var(--md-sys-color-secondary-container);
+            color: var(--md-sys-color-on-secondary-container);
             font-weight: 500;
-            color: var(--text-secondary);
+        }
+
+        .breakdown-table tr:last-child td {
+            border-bottom: none;
         }
 
         .bar-graph {
             height: 400px;
-            padding: 24px;
+            padding: 32px;
             position: relative;
-            background: white;
-            border-radius: 8px;
-            margin-bottom: 24px;
+            background: var(--md-sys-color-surface);
+            border-radius: var(--md-sys-shape-corner-large);
+            margin-bottom: 32px;
+            box-shadow: var(--md-sys-elevation-1);
         }
 
         .bar {
             position: absolute;
             bottom: 60px;
-            transition: height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            border-radius: 4px 4px 0 0;
+            transition: height 0.5s cubic-bezier(0.4, 0.0, 0.2, 1);
+            border-radius: var(--md-sys-shape-corner-small);
         }
 
         .bar-label {
@@ -243,7 +287,8 @@
             transform: translateX(-50%);
             text-align: center;
             font-size: 14px;
-            color: var(--text-secondary);
+            color: var(--md-sys-color-on-surface-variant);
+            font-weight: 500;
         }
 
         .bar-value {
@@ -252,7 +297,14 @@
             text-align: center;
             font-size: 14px;
             font-weight: 500;
-            color: var(--text-primary);
+        }
+
+        .material-symbols-rounded {
+            font-variation-settings:
+            'FILL' 1,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24;
         }
 
         @media (max-width: 768px) {
@@ -271,6 +323,11 @@
             button {
                 width: 100%;
             }
+
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -287,7 +344,7 @@
             <div class="card">
                 <h2>Bienvenido a Tu Calculadora Integral de Salario Mexicano</h2>
                 <div class="explanation">
-                    <span class="material-icons">info</span>
+                    <span class="material-symbols-rounded">info</span>
                     <p>Esta calculadora te ayuda a evaluar tu situación financiera en diferentes ciudades de México, considerando:</p>
                     <ul>
                         <li>Salario anual y deducciones</li>
@@ -297,7 +354,7 @@
                     </ul>
                 </div>
                 <button class="primary" onclick="showPage('locationPage')">
-                    <span class="material-icons">arrow_forward</span>
+                    <span class="material-symbols-rounded">arrow_forward</span>
                     Empezar
                 </button>
             </div>
@@ -307,8 +364,8 @@
             <div class="card">
                 <h2>Selecciona Ciudades para Comparar</h2>
                 <div class="explanation">
-                    <span class="material-icons">location_city</span>
-                    <p>Elige hasta tres ciudades mexicanas para comparar costos de vida y salarios.</p>
+                    <span class="material-symbols-rounded">location_city</span>
+                    <p>Elige hasta tres ciudades mexicanas para comparar costos de vida.</p>
                 </div>
                 <div class="form-group">
                     <label for="location1">Ciudad 1:</label>
@@ -324,11 +381,11 @@
                 </div>
                 <div class="button-container">
                     <button class="secondary" onclick="showPage('introPage')">
-                        <span class="material-icons">arrow_back</span>
+                        <span class="material-symbols-rounded">arrow_back</span>
                         Anterior
                     </button>
                     <button class="primary" onclick="showPage('salaryPage')">
-                        <span class="material-icons">arrow_forward</span>
+                        <span class="material-symbols-rounded">arrow_forward</span>
                         Siguiente
                     </button>
                 </div>
@@ -339,20 +396,23 @@
             <div class="card">
                 <h2>Ingresa tu Información Salarial</h2>
                 <div class="explanation">
-                    <span class="material-icons">monetization_on</span>
-                    <p>Proporciona tu salario anual en Pesos Mexicanos (MXN) para calcular tu situación financiera.</p>
+                    <span class="material-symbols-rounded">payments</span>
+                    <p>Proporciona tu salario anual en Pesos Mexicanos (MXN) para calc
+
+
+<p>Proporciona tu salario anual en Pesos Mexicanos (MXN) para calcular tu situación financiera.</p>
                 </div>
                 <div class="input-field">
                     <label for="salary">Salario Anual (MXN):</label>
-                    <input type="text" id="salary" required placeholder="Ejemplo: 360000">
+                    <input type="text" id="salary" required placeholder="Ejemplo: 360,000">
                 </div>
                 <div class="button-container">
                     <button class="secondary" onclick="showPage('locationPage')">
-                        <span class="material-icons">arrow_back</span>
+                        <span class="material-symbols-rounded">arrow_back</span>
                         Anterior
                     </button>
                     <button class="primary" onclick="calculateResults()">
-                        <span class="material-icons">calculate</span>
+                        <span class="material-symbols-rounded">calculate</span>
                         Calcular
                     </button>
                 </div>
@@ -363,13 +423,13 @@
             <div class="card">
                 <h2>Resultados del Análisis</h2>
                 <div class="explanation">
-                    <span class="material-icons">assessment</span>
+                    <span class="material-symbols-rounded">analytics</span>
                     <p>Comparación detallada de tu situación financiera en cada ciudad seleccionada.</p>
                 </div>
                 <div id="resultsContainer"></div>
                 <div class="button-container">
                     <button class="primary" onclick="showPage('locationPage')">
-                        <span class="material-icons">refresh</span>
+                        <span class="material-symbols-rounded">refresh</span>
                         Nueva Comparación
                     </button>
                 </div>
@@ -472,16 +532,26 @@
                 select.innerHTML = '<option value="">Selecciona una ciudad</option>';
                 Object.keys(cityData).forEach(city => {
                     const option = document.createElement('option');
-        option.value = city;
+                    option.value = city;
                     option.textContent = city;
                     select.appendChild(option);
                 });
             });
+
+            // Prepopulate default selections
+            document.getElementById('location1').value = "Ciudad de México";
+            document.getElementById('location2').value = "Guadalajara";
+            document.getElementById('location3').value = "Monterrey";
         }
 
         function showPage(pageId) {
             document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
+            
+            // Set default salary when showing salary page
+            if (pageId === 'salaryPage' && !document.getElementById('salary').value) {
+                document.getElementById('salary').value = '360,000';
+            }
         }
 
         function calculateMexicanTax(salary) {
@@ -555,7 +625,7 @@
             barGraph.className = 'bar-graph';
 
             const maxAbsRemaining = Math.max(...results.map(r => Math.abs(r.remainingMoney)));
-            const graphHeight = 300; // Useful height for bars
+            const graphHeight = 300;
 
             results.forEach((result, index) => {
                 const bar = document.createElement('div');
@@ -564,7 +634,9 @@
                 bar.style.height = `${height}px`;
                 bar.style.left = `${(index / results.length) * 100 + 10}%`;
                 bar.style.width = `${80 / results.length}%`;
-                bar.style.backgroundColor = result.remainingMoney >= 0 ? '#4CAF50' : '#F44336';
+                bar.style.backgroundColor = result.remainingMoney >= 0 ? 
+                    'var(--md-sys-color-primary)' : 
+                    'var(--md-sys-color-error)';
 
                 const label = document.createElement('div');
                 label.className = 'bar-label';
@@ -576,7 +648,9 @@
                 value.textContent = formatMoney(result.remainingMoney);
                 value.style.left = `${(index / results.length) * 100 + 10 + (40 / results.length)}%`;
                 value.style.bottom = `${height + 70}px`;
-                value.style.color = result.remainingMoney >= 0 ? '#4CAF50' : '#F44336';
+                value.style.color = result.remainingMoney >= 0 ? 
+                    'var(--md-sys-color-primary)' : 
+                    'var(--md-sys-color-error)';
 
                 barGraph.appendChild(bar);
                 barGraph.appendChild(label);
@@ -657,7 +731,9 @@
                             </tr>
                             <tr>
                                 <th>Dinero Restante Anual:</th>
-                                <th style="color: ${result.remainingMoney >= 0 ? '#4CAF50' : '#F44336'}">${formatMoney(result.remainingMoney)}</th>
+                                <th style="color: ${result.remainingMoney >= 0 ? 'var(--md-sys-color-primary)' : 'var(--md-sys-color-error)'}">
+                                    ${formatMoney(result.remainingMoney)}
+                                </th>
                             </tr>
                         </table>
                     </div>
@@ -666,17 +742,6 @@
             });
 
             container.appendChild(resultsGrid);
-        }
-
-        function validateForm() {
-            const salary = document.getElementById('salary').value.trim();
-            const location1 = document.getElementById('location1').value;
-            
-            if (!salary || !location1) {
-                alert('Por favor, ingresa tu salario y selecciona al menos una ubicación.');
-                return false;
-            }
-            return true;
         }
 
         // Event listeners
